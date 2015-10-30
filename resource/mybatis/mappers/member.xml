@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+
+	<select id="getMember" resultType="MemberVo" parameterType="MemberVo">
+		<![CDATA[
+		select * 
+		  from member 
+		where email = #email# 
+		   and password = #password#
+		]]>
+	</select>
+
+	<select id="joinlist" resultType="map">
+		select a.no, a.title,
+		a.reg_date, b.no, b.name, b.email
+		from board a,
+		member b
+		where
+		a.member_no = b.no
+		order by a.reg_date desc
+	</select>
+
+</mapper>
